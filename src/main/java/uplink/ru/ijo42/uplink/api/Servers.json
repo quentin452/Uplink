@@ -1,0 +1,22 @@
+[
+  {
+    "uid": "mc.ijo42.online",
+    "key": "server-cascade",
+    "name": "Cascade Server"
+  },
+  {
+    "uid": "localhost",
+    "key": "server-localhost",
+    "name": "Local Server"
+  },
+  {
+    "uid": "127.0.0.1",
+    "key": "server-localhost",
+    "name": "Local Server"
+  },
+  {
+    "uid": "0.0.0.0",
+    "key": "server-localhost",
+    "name": "Local Server"
+  }
+]

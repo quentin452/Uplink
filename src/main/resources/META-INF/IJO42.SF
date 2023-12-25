@@ -1,0 +1,244 @@
+Signature-Version: 1.0
+SHA-256-Digest-Manifest-Main-Attributes: P/GWn9KxKnlusJoOUrfAm1ywcL4oa
+ EUaLDsovYZXEIA=
+SHA-256-Digest-Manifest: PHukDeZNnC+MYRloPMax18OwyMoJzn1Kg5H6S6RImsI=
+Created-By: 1.8.0_211 (Oracle Corporation)
+
+Name: ru/ijo42/uplink/api/config/display/GUIDisplay$InGame.class
+SHA-256-Digest: WBEO5rFjeoQqXQPyvPw1YCYllmxZsIDCd4ky8fegS+Q=
+
+Name: ru/ijo42/uplink/Constants.class
+SHA-256-Digest: iOgfeii2qAH5OYZFZJ3WUgwOAFOjE6rs73m2vRxG8Bo=
+
+Name: ru/ijo42/uplink/api/config/Config.class
+SHA-256-Digest: giJC3pvYhGh0sHBG8g5dFj0GLDK3LRIPcpDgMSFUTm8=
+
+Name: com/jagrosh/discordipc/entities/pipe/PipeStatus.class
+SHA-256-Digest: pagpWgLTS+0Rv9wXJMjqyWbkD+A44ViYW5nhpdFn1JQ=
+
+Name: org/newsclub/net/unix/SuppressFBWarnings.class
+SHA-256-Digest: ujcXuM4qxej84+zLV315OWXSt5QyhHLrAOLikU4d+rE=
+
+Name: ru/ijo42/uplink/api/config/display/GUIDisplay$LoadingGame.class
+SHA-256-Digest: qBhE6ppPDrQ9YoabvBclVuQc5j+twXw0zvn8454Dm98=
+
+Name: ru/ijo42/uplink/api/config/display/GUIDisplay$MainMenu.class
+SHA-256-Digest: WkB+IFYZ4byVIP/livRRF46tn6Fu+Vv8Qeu+5do9djc=
+
+Name: com/jagrosh/discordipc/IPCClient$1.class
+SHA-256-Digest: h9lpfM1T0EQ9R/XNh8Ut5Z4jcwlk/PcZgdBs7hRh0IM=
+
+Name: org/newsclub/net/unix/NativeLibraryLoader.class
+SHA-256-Digest: 9qesfddQqxLRaTCrJmMqk0zDVC5TPrl7U2q5qq2JnXA=
+
+Name: ru/ijo42/uplink/api/Smalls.json
+SHA-256-Digest: kTGMr3k6GNe2NfNYX2sSwz56F/VsyKaLZsl1zxnbtyM=
+
+Name: lib/amd64-Linux-clang/jni/libjunixsocket-native-2.2.1.nodeps.so
+SHA-256-Digest: 9+TwsVuwcQHeZrrEXq6/Ha6/y5YXEXiB31sRxF9PE0U=
+
+Name: org/newsclub/net/unix/AFUNIXSocketFactory$URIScheme.class
+SHA-256-Digest: DgIP36K2HzjBa685/FpDPf56OF4OIVNQN5idACReYNk=
+
+Name: com/jagrosh/discordipc/IPCClient$Event.class
+SHA-256-Digest: 2qSvz+7B3e9OkU60teQ2k/Qig6jQIjlfMq1DiYX+ZWo=
+
+Name: lib/arm-Linux-clang/jni/libjunixsocket-native-2.2.1.nodeps.so
+SHA-256-Digest: bcsNeKIRQQHiJE/mDK4dCajfNWsTX+3l76OY33qztQQ=
+
+Name: ru/ijo42/uplink/PresenceListenerImpl.class
+SHA-256-Digest: 0Zgi5XU8HwHGqSlbncIymKSqXYitVhZY7hcyC/GBlxk=
+
+Name: org/newsclub/net/unix/NativeLibraryLoader$ClasspathLibraryCandid
+ ate.class
+SHA-256-Digest: D3YXrjd3l/oqjVhl7ko1osnuhkuejpWztjTvnB4L+BE=
+
+Name: org/newsclub/net/unix/AFUNIXSocketImpl$Lenient.class
+SHA-256-Digest: D2OcdNNtt5Ohp0INDAZla5ZlhN168TBZQiouISZ9CnQ=
+
+Name: org/newsclub/net/unix/AFUNIXSocketImpl$1.class
+SHA-256-Digest: XikNHf2h82g3nSBA8+V9JiLYiHeJXXEsdjqiPCuLrfw=
+
+Name: org/newsclub/net/unix/AFUNIXServerSocket.class
+SHA-256-Digest: jjutzZbsFVr9KXlnW0dihG4C+be7oLKAATcRTMXVkNw=
+
+Name: org/newsclub/net/unix/AFUNIXSocketFactory$FactoryArg.class
+SHA-256-Digest: jRV4O9ikWWCErC/w/5INX1Qh163kslzC7dEryckT/fM=
+
+Name: ru/ijo42/uplink/api/config/display/GUIDisplay$InGame$MultiPlayer
+ $LargeImageText.class
+SHA-256-Digest: aUsCJU6fQSaHnUW2Vf6liuwU65uH2JjfntfTVHGzItc=
+
+Name: org/newsclub/net/unix/AFUNIXSocketCredentials.class
+SHA-256-Digest: o436IS4yMKkbSPgf1mkhQDyJz8ElJktdVjQ95vGa+hk=
+
+Name: com/jagrosh/discordipc/IPCClient.class
+SHA-256-Digest: xHi/trZ3hyhhuQVCOPOCL0VF08pwxVg+GbDOwQtObd8=
+
+Name: ru/ijo42/uplink/api/UplinkAPI$1.class
+SHA-256-Digest: ZqwSzPNjsQvpvxA5bGwyFdlYCr98VCs4mGZJu9gmsvY=
+
+Name: ru/ijo42/uplink/api/util/DisplayDataManager.class
+SHA-256-Digest: KVh3dyWdnmE6pZKZbSp3+JP6pRm13fVAaMoiKohkQkw=
+
+Name: lib/amd64-Windows10-clang/jni/junixsocket-native-2.2.1.dll
+SHA-256-Digest: 1j3ZpdRor/ab5Z4OIWEk5qMkOi/Y4inH7s80qgZjjWs=
+
+Name: ru/ijo42/uplink/api/PresenceManager.class
+SHA-256-Digest: J1PdAtzyjt6EzWafOMeHkgomBbM+nRS5GAGTIt35RqY=
+
+Name: lib/aarch64-Linux-clang/jni/libjunixsocket-native-2.2.1.so
+SHA-256-Digest: wYZ+Az22lRbyT7vfwwzvgBXo4Ooikpk5Q+xwCPr4AgU=
+
+Name: com/jagrosh/discordipc/IPCClient$ApprovalMode.class
+SHA-256-Digest: A7i7MRJnl5HqpWalvsFe8ruQAB6LTq97I8UwJNuznFA=
+
+Name: org/newsclub/net/unix/AFUNIXSocketFactory$SystemProperty.class
+SHA-256-Digest: P9cNEOFBr664D8UxNKxUrgNqxXw5W+S234YJjHpki4g=
+
+Name: ru/ijo42/uplink/api/PresenceState.class
+SHA-256-Digest: +gYmprG5Z33HgeO4ZlIzwy1cAGMmwOuVURXUfi02BQc=
+
+Name: com/jagrosh/discordipc/entities/Callback.class
+SHA-256-Digest: q0W6iuGrFUAFTInCYcJaom2iPGDv5GoVuvvBZkpfnSE=
+
+Name: org/newsclub/net/unix/AFUNIXSocket.class
+SHA-256-Digest: 8QiiufIHMeTjtpSymoWo2qmxbk/tz7C05cQDtrlLfWs=
+
+Name: lib/arm-Linux-clang/jni/libjunixsocket-native-2.2.1.so
+SHA-256-Digest: j7o5h5u9qRS7HJd+4HQBfwH+yinZZXxfp4zax/y4rIg=
+
+Name: com/jagrosh/discordipc/entities/User.class
+SHA-256-Digest: PVxLdQWO2k9xaAAdwmL/rAkWkKP3KO5FAw4pLbF3KhA=
+
+Name: org/newsclub/net/unix/NativeUnixSocket.class
+SHA-256-Digest: qWjNKQGErlQlTO8O04gJ/DLA/e+P1RBOW+auZzoA7OI=
+
+Name: org/newsclub/net/unix/AFUNIXSocketCapability.class
+SHA-256-Digest: /aRA6vy0WCz/eEsgDctXJ4j1ntYFsKLvlwDJhnRYQXA=
+
+Name: ru/ijo42/uplink/api/PresenceListener.class
+SHA-256-Digest: uwP3jxBb2dOG+GWQ4uel7Yz+WShSaHyilZtwLp+jW40=
+
+Name: ru/ijo42/uplink/api/util/MiscUtil.class
+SHA-256-Digest: ua1E9f8bNCmVgnjtOdnkss7OOxjQjMTgvDe1fENfFWQ=
+
+Name: ru/ijo42/uplink/api/UplinkAPI.class
+SHA-256-Digest: HlVxb8ykm4mPnpJyTMbnB5Naav9tJGzfpTvo1rlhRSA=
+
+Name: org/newsclub/net/unix/NativeLibraryLoader$StandardLibraryCandida
+ te.class
+SHA-256-Digest: USJdITx0T+dj1kanL1o/CueJvWK/ukzwZqxS8TUcIP8=
+
+Name: lib/amd64-Linux-clang/jni/libjunixsocket-native-2.2.1.so
+SHA-256-Digest: FPsIESZnGJ6wk12yFfCb9MBMfWTd7NfVCm78+k2PeJc=
+
+Name: org/newsclub/net/unix/AFUNIXSocketFactory$DefaultSocketHostnameS
+ ocketFactory.class
+SHA-256-Digest: +rp//VawGQi4g2Ts0aTa8NkqSsn4yVlmhOYh2vX51/A=
+
+Name: ru/ijo42/uplink/api/Servers.json
+SHA-256-Digest: l4CKKFCeZPqZ8HrIxXZq7zCXw+mqOLaPFcEZVz6lsGI=
+
+Name: ru/ijo42/uplink/api/config/display/ServerDisplay.class
+SHA-256-Digest: g9kKISD6H4TV9gNtAdd3XsTO0uNYa00eSKv6J9HjB/U=
+
+Name: ru/ijo42/uplink/api/GUI.json
+SHA-256-Digest: qaql2ZNVWuhEG/ChOoWxPimv1C8B6H+BYgAEcm9aLew=
+
+Name: lib/aarch64-Linux-clang/jni/libjunixsocket-native-2.2.1.nodeps.s
+ o
+SHA-256-Digest: g2ZQHnvbEC84xvHEOC4A0QGslSG3Ovyuz2z0syaKm34=
+
+Name: com/jagrosh/discordipc/entities/pipe/Pipe.class
+SHA-256-Digest: uedWd2lApOguOZhxIlNQxJuHhqoi0GpiIiHgnQ3VpGI=
+
+Name: org/newsclub/net/unix/AFUNIXSocketImpl$AFUNIXInputStream.class
+SHA-256-Digest: Qf4U2s0IPl4TBI6bWcrMNbldY/C942EWiHxW77eMs2U=
+
+Name: org/newsclub/net/unix/AFUNIXSocketAddress.class
+SHA-256-Digest: IZlpLDMjdih6IQSdxzkEe8dSsztGjra4Ez9DcK1dXPI=
+
+Name: com/jagrosh/discordipc/entities/Packet.class
+SHA-256-Digest: mNBKKZH9Or5BdtqA/fClETcHlVBzx8TDv8M7s6Z0drw=
+
+Name: ru/ijo42/uplink/api/Uplink.json
+SHA-256-Digest: ZBoAGEemxfmsVNq9qSuEX9ljPBfesDXOYdNCsr1bDAI=
+
+Name: com/jagrosh/discordipc/entities/DiscordBuild.class
+SHA-256-Digest: HMq8/8/xyGwXQATEv7waFG3Mgnbg7seQiEpPRRu1Yfc=
+
+Name: ru/ijo42/uplink/api/ForgeAPI.class
+SHA-256-Digest: zkP2ET6a1Bv78dnd9IdbNvrKeHXO1alc1h41ItEaL9M=
+
+Name: com/jagrosh/discordipc/IPCListener.class
+SHA-256-Digest: XC5q3tvhboymkCM6X+J6i6NDIvZSpa++IW1KXzvrIxM=
+
+Name: org/newsclub/net/unix/AFUNIXSocketImpl$AFUNIXOutputStream.class
+SHA-256-Digest: KJrbOCKJcEWQI8lGNuNqfVxRwwWFheVvqbZbGtQk2ck=
+
+Name: com/jagrosh/discordipc/entities/RichPresence.class
+SHA-256-Digest: jDmhDeamdYKIZMwVh+iWjgrFFdyjk2F5/Sch2e/fmTA=
+
+Name: ru/ijo42/uplink/Uplink.class
+SHA-256-Digest: LlgeecQbDpKOn3uQaTCOVh27RuTB0YvsZYH+JayU4BY=
+
+Name: com/jagrosh/discordipc/entities/RichPresence$Builder.class
+SHA-256-Digest: +mzVpHy2DvJclb5bcbE+ZikgKStSz6B9x72oyO+Czys=
+
+Name: ru/ijo42/uplink/api/config/display/GUIDisplay.class
+SHA-256-Digest: 7j6igcEPtJB3Floc6n4i0TFgs/EWH2Sc9Js7IeDof4c=
+
+Name: com/jagrosh/discordipc/entities/pipe/UnixPipe.class
+SHA-256-Digest: INjhU/GVLiNH6oKfGU6L/5QZkMFEkY1enKqibtGWD/Q=
+
+Name: com/jagrosh/discordipc/entities/pipe/WindowsPipe.class
+SHA-256-Digest: 2w/aEA06YZ7tGE4LQ9qzpL4oYdaI43UVvZMSTsP3ASQ=
+
+Name: com/jagrosh/discordipc/exceptions/NoDiscordClientException.class
+SHA-256-Digest: svClGpywEAW9WU8UDz7iKZxdMJWk0Ryv1+hBjHY4CLU=
+
+Name: ru/ijo42/uplink/api/config/display/GUIDisplay$InGame$SinglePlaye
+ r.class
+SHA-256-Digest: s99LiXV+Ngk8G7akZBSkaY75iCb3hFA0BiitF3qkzZU=
+
+Name: org/newsclub/net/unix/AFUNIXSocketImpl.class
+SHA-256-Digest: sNEOlaNKlHefpTTHyssJJXZ5809tYZfyrBJuA0u+J38=
+
+Name: ru/ijo42/uplink/api/config/Config$DisplayUrls.class
+SHA-256-Digest: jcozaWw/6d5QEIbgQmvryKqupqLh2rIHPfP/kL/F810=
+
+Name: com/jagrosh/discordipc/entities/Packet$OpCode.class
+SHA-256-Digest: 9kUyDGXN2dq4jFHDyrFlTy59m39NzvdLtkA4+ooAquE=
+
+Name: org/newsclub/lib/junixsocket/common/NarMetadata.class
+SHA-256-Digest: 7WpwvqWgct7wDDkTtzBNLf9Rhm0kZP8cJvsQmaaPzgQ=
+
+Name: org/newsclub/net/unix/AFUNIXSocketFactory.class
+SHA-256-Digest: meBt7lJMRPPLE+Rolyz5yNW2794+NDWjJ19XwryJOdM=
+
+Name: lib/x86_64-MacOSX-clang/jni/libjunixsocket-native-2.2.1.dylib
+SHA-256-Digest: HkgqqhAn5i+T9ldoZtay6DizxntqphjoxQo94cwK1jo=
+
+Name: ru/ijo42/uplink/api/util/LoadingUtils.class
+SHA-256-Digest: Kxt6cfKJbUycYYb7+my/h5MdII4QXvYorCqV+L2i60s=
+
+Name: org/newsclub/net/unix/NativeLibraryLoader$LibraryCandidate.class
+SHA-256-Digest: vVDa3FLACs+Jsd2I0fgDZ5WQf5/gFUKlpRngXJzgstQ=
+
+Name: ru/ijo42/uplink/Uplink$1.class
+SHA-256-Digest: Sz5Fq2KWkowBtXR3kFR8z9tUi8GJCgZA0JtUzVn5YTI=
+
+Name: ru/ijo42/uplink/api/config/display/GUIDisplay$InGame$MultiPlayer
+ .class
+SHA-256-Digest: 3U98n2pIWFwQYtyGazDAFr+bNBydjx5vc+YjPNcCz2E=
+
+Name: org/newsclub/net/unix/AFUNIXSocketFactory$1.class
+SHA-256-Digest: /W4imX/SJZ4IiI2s9kzOlDQinF5SiqQw5oKxKiAzqdo=
+
+Name: ru/ijo42/uplink/api/config/display/SmallDisplay.class
+SHA-256-Digest: 1OVAoP5HN5QQ/MRqdU2hPhRDyBf/trqw5LXODwwQHzQ=
+
+Name: mcmod.info
+SHA-256-Digest: Hlyrz2gEALa3rmDeTbrMGEk+UWPstcNb1cYmzLEpMFk=
+
