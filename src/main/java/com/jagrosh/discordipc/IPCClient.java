@@ -20,7 +20,7 @@ public final class IPCClient implements Closeable {
    private final boolean debugMode;
    private final HashMap callbacks = new HashMap();
    private volatile Pipe pipe;
-   private IPCListener listener = null;
+   private com.jagrosh.discordipc.IPCListener listener = null;
    private Thread readThread = null;
    private String encoding = "UTF-8";
 
@@ -39,7 +39,7 @@ public final class IPCClient implements Closeable {
       return Integer.parseInt(pr.substring(0, pr.indexOf(64)));
    }
 
-   public void setListener(IPCListener listener) {
+   public void setListener(com.jagrosh.discordipc.IPCListener listener) {
       this.listener = listener;
       if (this.pipe != null) {
          this.pipe.setListener(listener);
@@ -173,7 +173,7 @@ public final class IPCClient implements Closeable {
          while(true) {
             try {
                Packet p;
-               if ((p = thisx.pipe.read()).getOp() != Packet.OpCode.CLOSE) {
+               if ((p = pipe.read()).getOp() != Packet.OpCode.CLOSE) {
                   JsonObject json = p.getJson();
                   if (json == null) {
                      continue;
@@ -183,37 +183,37 @@ public final class IPCClient implements Closeable {
                   String nonce = json.has("nonce") && !json.get("nonce").isJsonNull() ? json.getAsJsonPrimitive("nonce").getAsString() : null;
                   switch(event) {
                   case NULL:
-                     if (nonce != null && thisx.callbacks.containsKey(nonce)) {
-                        ((Callback)thisx.callbacks.remove(nonce)).succeed(p);
+                     if (nonce != null && callbacks.containsKey(nonce)) {
+                        ((Callback)callbacks.remove(nonce)).succeed(p);
                      }
                      break;
                   case ERROR:
-                     if (nonce != null && thisx.callbacks.containsKey(nonce)) {
-                        ((Callback)thisx.callbacks.remove(nonce)).fail(json.has("data") && json.getAsJsonObject("data").has("message") ? json.getAsJsonObject("data").getAsJsonObject("message").getAsString() : null);
+                     if (nonce != null && callbacks.containsKey(nonce)) {
+                        ((Callback)callbacks.remove(nonce)).fail(json.has("data") && json.getAsJsonObject("data").has("message") ? json.getAsJsonObject("data").getAsJsonObject("message").getAsString() : null);
                      }
                      break;
                   case ACTIVITY_JOIN:
-                     if (thisx.debugMode) {
+                     if (debugMode) {
                         System.out.println("Reading thread received a 'join' event.");
                      }
                      break;
                   case ACTIVITY_SPECTATE:
-                     if (thisx.debugMode) {
+                     if (debugMode) {
                         System.out.println("Reading thread received a 'spectate' event.");
                      }
                      break;
                   case ACTIVITY_JOIN_REQUEST:
-                     if (thisx.debugMode) {
+                     if (debugMode) {
                         System.out.println("Reading thread received a 'join request' event.");
                      }
                      break;
                   case UNKNOWN:
-                     if (thisx.debugMode) {
+                     if (debugMode) {
                         System.out.println("Reading thread encountered an event with an unknown type: " + json.getAsJsonPrimitive("evt").getAsString());
                      }
                   }
 
-                  if (thisx.listener == null || !json.has("cmd") || !json.getAsJsonPrimitive("cmd").getAsString().equals("DISPATCH")) {
+                  if (listener == null || !json.has("cmd") || !json.getAsJsonPrimitive("cmd").getAsString().equals("DISPATCH")) {
                      continue;
                   }
 
@@ -221,15 +221,15 @@ public final class IPCClient implements Closeable {
                      JsonObject data = json.getAsJsonObject("data");
                      switch(IPCClient.Event.of(json.getAsJsonPrimitive("evt").getAsString())) {
                      case ACTIVITY_JOIN:
-                        thisx.listener.onActivityJoin(this, data.getAsJsonObject("secret").getAsString());
+                        listener.onActivityJoin(this, data.getAsJsonObject("secret").getAsString());
                         continue;
                      case ACTIVITY_SPECTATE:
-                        thisx.listener.onActivitySpectate(this, data.getAsJsonObject("secret").getAsString());
+                        listener.onActivitySpectate(this, data.getAsJsonObject("secret").getAsString());
                         continue;
                      case ACTIVITY_JOIN_REQUEST:
                         JsonObject u = data.getAsJsonObject("user");
                         User user = new User(u.getAsJsonPrimitive("username").getAsString(), u.getAsJsonPrimitive("discriminator").getAsString(), Long.parseLong(u.getAsJsonPrimitive("id").getAsString()), u.has("avatar") ? u.getAsJsonPrimitive("avatar").getAsString() : null);
-                        thisx.listener.onActivityJoinRequest(this, data.has("secret") ? data.getAsJsonObject("secret").getAsString() : null, user);
+                        listener.onActivityJoinRequest(this, data.has("secret") ? data.getAsJsonObject("secret").getAsString() : null, user);
                      }
                   } catch (Exception var9) {
                      System.out.printf("Exception when handling event: %s%n", var9);
@@ -237,9 +237,9 @@ public final class IPCClient implements Closeable {
                   continue;
                }
 
-               thisx.pipe.setStatus(PipeStatus.DISCONNECTED);
-               if (thisx.listener != null) {
-                  thisx.listener.onClose(this, p.getJson());
+               pipe.setStatus(PipeStatus.DISCONNECTED);
+               if (listener != null) {
+                  listener.onClose(this, p.getJson());
                }
             } catch (JsonParseException | IOException var10) {
                if (var10 instanceof IOException) {
@@ -248,9 +248,9 @@ public final class IPCClient implements Closeable {
                   System.out.printf("Reading thread encountered an JSONException: %s%n", var10);
                }
 
-               thisx.pipe.setStatus(PipeStatus.DISCONNECTED);
-               if (thisx.listener != null) {
-                  thisx.listener.onDisconnect(this, var10);
+               pipe.setStatus(PipeStatus.DISCONNECTED);
+               if (listener != null) {
+                  listener.onDisconnect(this, var10);
                }
             }
 

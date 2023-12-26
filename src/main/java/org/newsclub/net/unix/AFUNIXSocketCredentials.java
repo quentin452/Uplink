@@ -69,9 +69,8 @@ public final class AFUNIXSocketCredentials {
    }
 
    public int hashCode() {
-      int prime = true;
       int result = 1;
-      int result = 31 * result + Arrays.hashCode(this.gids);
+      result = 31 * result + Arrays.hashCode(this.gids);
       result = 31 * result + (int)(this.pid ^ this.pid >>> 32);
       result = 31 * result + (int)(this.uid ^ this.uid >>> 32);
       result = 31 * result + (this.uuid == null ? 0 : this.uuid.hashCode());

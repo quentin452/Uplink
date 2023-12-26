@@ -16,7 +16,7 @@ import ru.ijo42.uplink.api.UplinkAPI;
    modid = "uplink",
    name = "Uplink",
    version = "1.2.3",
-   certificateFingerprint = "ae2668515138eceb53d9e8c984322de3c34f9e21"
+    certificateFingerprint = "ae2668515138eceb53d9e8c984322de3c34f9e21"
 )
 public class Uplink {
    @EventHandler

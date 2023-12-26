@@ -24,7 +24,7 @@ class AFUNIXSocketImpl extends SocketImpl {
    private static final int SHUT_RD = 0;
    private static final int SHUT_WR = 1;
    private static final int SHUT_RD_WR = 2;
-   private AFUNIXSocketAddress socketAddress;
+   private org.newsclub.net.unix.AFUNIXSocketAddress socketAddress;
    private long inode = -1L;
    private volatile boolean closed = false;
    private volatile boolean bound = false;
@@ -61,7 +61,7 @@ class AFUNIXSocketImpl extends SocketImpl {
 
             while(var2.hasNext()) {
                FileDescriptor fd = (FileDescriptor)var2.next();
-               NativeUnixSocket.close(fd);
+               org.newsclub.net.unix.NativeUnixSocket.close(fd);
             }
          }
       } catch (Throwable var7) {
@@ -82,15 +82,15 @@ class AFUNIXSocketImpl extends SocketImpl {
             throw new SocketException("Socket is closed");
          }
 
-         NativeUnixSocket.accept(this.socketAddress.getBytes(), fdesc, si.fd, this.inode, this.timeout);
+         org.newsclub.net.unix.NativeUnixSocket.accept(this.socketAddress.getBytes(), fdesc, si.fd, this.inode, this.timeout);
          if (!this.bound || this.closed) {
             try {
-               NativeUnixSocket.shutdown(si.fd, 2);
+               org.newsclub.net.unix.NativeUnixSocket.shutdown(si.fd, 2);
             } catch (Exception var10) {
             }
 
             try {
-               NativeUnixSocket.close(si.fd);
+               org.newsclub.net.unix.NativeUnixSocket.close(si.fd);
             } catch (Exception var9) {
             }
 
@@ -106,7 +106,7 @@ class AFUNIXSocketImpl extends SocketImpl {
 
    protected int available() throws IOException {
       FileDescriptor fdesc = this.validFdOrException();
-      return NativeUnixSocket.available(fdesc);
+      return org.newsclub.net.unix.NativeUnixSocket.available(fdesc);
    }
 
    protected void bind(SocketAddress addr) throws IOException {
@@ -114,11 +114,11 @@ class AFUNIXSocketImpl extends SocketImpl {
    }
 
    protected void bind(SocketAddress addr, int options) throws IOException {
-      if (!(addr instanceof AFUNIXSocketAddress)) {
+      if (!(addr instanceof org.newsclub.net.unix.AFUNIXSocketAddress)) {
          throw new SocketException("Cannot bind to this type of address: " + addr.getClass());
       } else {
-         this.socketAddress = (AFUNIXSocketAddress)addr;
-         this.inode = NativeUnixSocket.bind(this.socketAddress.getBytes(), this.fd, options);
+         this.socketAddress = (org.newsclub.net.unix.AFUNIXSocketAddress)addr;
+         this.inode = org.newsclub.net.unix.NativeUnixSocket.bind(this.socketAddress.getBytes(), this.fd, options);
          this.validFdOrException();
          this.bound = true;
          this.localport = this.socketAddress.getPort();
@@ -142,18 +142,18 @@ class AFUNIXSocketImpl extends SocketImpl {
             FileDescriptor tmpFd = new FileDescriptor();
 
             try {
-               NativeUnixSocket.connect(this.socketAddress.getBytes(), tmpFd, this.inode);
+               org.newsclub.net.unix.NativeUnixSocket.connect(this.socketAddress.getBytes(), tmpFd, this.inode);
             } catch (IOException var5) {
                return;
             }
 
             try {
-               NativeUnixSocket.shutdown(tmpFd, 2);
+               org.newsclub.net.unix.NativeUnixSocket.shutdown(tmpFd, 2);
             } catch (Exception var4) {
             }
 
             try {
-               NativeUnixSocket.close(tmpFd);
+               org.newsclub.net.unix.NativeUnixSocket.close(tmpFd);
             } catch (Exception var3) {
             }
          } catch (Exception var6) {
@@ -167,13 +167,13 @@ class AFUNIXSocketImpl extends SocketImpl {
       this.bound = false;
       FileDescriptor fdesc = this.validFd();
       if (fdesc != null) {
-         NativeUnixSocket.shutdown(fdesc, 2);
+         org.newsclub.net.unix.NativeUnixSocket.shutdown(fdesc, 2);
          this.closed = true;
          if (wasBound && this.socketAddress != null && this.socketAddress.getBytes() != null && this.inode >= 0L) {
             this.unblockAccepts();
          }
 
-         NativeUnixSocket.close(fdesc);
+         org.newsclub.net.unix.NativeUnixSocket.close(fdesc);
       }
 
       this.closed = true;
@@ -188,11 +188,11 @@ class AFUNIXSocketImpl extends SocketImpl {
    }
 
    protected void connect(SocketAddress addr, int connectTimeout) throws IOException {
-      if (!(addr instanceof AFUNIXSocketAddress)) {
+      if (!(addr instanceof org.newsclub.net.unix.AFUNIXSocketAddress)) {
          throw new SocketException("Cannot bind to this type of address: " + addr.getClass());
       } else {
-         this.socketAddress = (AFUNIXSocketAddress)addr;
-         NativeUnixSocket.connect(this.socketAddress.getBytes(), this.fd, -1L);
+         this.socketAddress = (org.newsclub.net.unix.AFUNIXSocketAddress)addr;
+         org.newsclub.net.unix.NativeUnixSocket.connect(this.socketAddress.getBytes(), this.fd, -1L);
          this.validFdOrException();
          this.address = this.socketAddress.getAddress();
          this.port = this.socketAddress.getPort();
@@ -228,12 +228,12 @@ class AFUNIXSocketImpl extends SocketImpl {
          backlog = 50;
       }
 
-      NativeUnixSocket.listen(fdesc, backlog);
+      org.newsclub.net.unix.NativeUnixSocket.listen(fdesc, backlog);
    }
 
    protected void sendUrgentData(int data) throws IOException {
       FileDescriptor fdesc = this.validFdOrException();
-      NativeUnixSocket.write(this, fdesc, new byte[]{(byte)(data & 255)}, 0, 1, this.pendingFileDescriptors);
+      org.newsclub.net.unix.NativeUnixSocket.write(this, fdesc, new byte[]{(byte)(data & 255)}, 0, 1, this.pendingFileDescriptors);
    }
 
    private FileDescriptor validFdOrException() throws SocketException {
@@ -288,13 +288,13 @@ class AFUNIXSocketImpl extends SocketImpl {
             switch(optID) {
             case 1:
             case 8:
-               return NativeUnixSocket.getSocketOptionInt(fdesc, optID) != 0;
+               return org.newsclub.net.unix.NativeUnixSocket.getSocketOptionInt(fdesc, optID) != 0;
             case 128:
             case 4097:
             case 4098:
-               return NativeUnixSocket.getSocketOptionInt(fdesc, optID);
+               return org.newsclub.net.unix.NativeUnixSocket.getSocketOptionInt(fdesc, optID);
             case 4102:
-               return Math.max(this.timeout, Math.max(NativeUnixSocket.getSocketOptionInt(fdesc, 4101), NativeUnixSocket.getSocketOptionInt(fdesc, 4102)));
+               return Math.max(this.timeout, Math.max(org.newsclub.net.unix.NativeUnixSocket.getSocketOptionInt(fdesc, 4101), org.newsclub.net.unix.NativeUnixSocket.getSocketOptionInt(fdesc, 4102)));
             default:
                throw new SocketException("Unsupported option: " + optID);
             }
@@ -316,7 +316,7 @@ class AFUNIXSocketImpl extends SocketImpl {
             switch(optID) {
             case 1:
             case 8:
-               NativeUnixSocket.setSocketOptionInt(fdesc, optID, expectBoolean(value));
+               org.newsclub.net.unix.NativeUnixSocket.setSocketOptionInt(fdesc, optID, expectBoolean(value));
                return;
             case 128:
                if (value instanceof Boolean) {
@@ -325,20 +325,20 @@ class AFUNIXSocketImpl extends SocketImpl {
                      throw new SocketException("Only accepting Boolean.FALSE here");
                   }
 
-                  NativeUnixSocket.setSocketOptionInt(fdesc, optID, -1);
+                  org.newsclub.net.unix.NativeUnixSocket.setSocketOptionInt(fdesc, optID, -1);
                   return;
                }
 
-               NativeUnixSocket.setSocketOptionInt(fdesc, optID, expectInteger(value));
+               org.newsclub.net.unix.NativeUnixSocket.setSocketOptionInt(fdesc, optID, expectInteger(value));
                return;
             case 4097:
             case 4098:
-               NativeUnixSocket.setSocketOptionInt(fdesc, optID, expectInteger(value));
+               org.newsclub.net.unix.NativeUnixSocket.setSocketOptionInt(fdesc, optID, expectInteger(value));
                return;
             case 4102:
                this.timeout = expectInteger(value);
-               NativeUnixSocket.setSocketOptionInt(fdesc, 4101, this.timeout);
-               NativeUnixSocket.setSocketOptionInt(fdesc, 4102, this.timeout);
+               org.newsclub.net.unix.NativeUnixSocket.setSocketOptionInt(fdesc, 4101, this.timeout);
+               org.newsclub.net.unix.NativeUnixSocket.setSocketOptionInt(fdesc, 4102, this.timeout);
                return;
             default:
                throw new SocketException("Unsupported option: " + optID);
@@ -354,7 +354,7 @@ class AFUNIXSocketImpl extends SocketImpl {
    protected void shutdownInput() throws IOException {
       FileDescriptor fdesc = this.validFd();
       if (fdesc != null) {
-         NativeUnixSocket.shutdown(fdesc, 0);
+         org.newsclub.net.unix.NativeUnixSocket.shutdown(fdesc, 0);
       }
 
    }
@@ -362,13 +362,13 @@ class AFUNIXSocketImpl extends SocketImpl {
    protected void shutdownOutput() throws IOException {
       FileDescriptor fdesc = this.validFd();
       if (fdesc != null) {
-         NativeUnixSocket.shutdown(fdesc, 1);
+         org.newsclub.net.unix.NativeUnixSocket.shutdown(fdesc, 1);
       }
 
    }
 
-   AFUNIXSocketCredentials getPeerCredentials() throws IOException {
-      return NativeUnixSocket.peerCredentials(this.fd, new AFUNIXSocketCredentials());
+   org.newsclub.net.unix.AFUNIXSocketCredentials getPeerCredentials() throws IOException {
+      return org.newsclub.net.unix.NativeUnixSocket.peerCredentials(this.fd, new org.newsclub.net.unix.AFUNIXSocketCredentials());
    }
 
    int getAncillaryReceiveBufferSize() {
@@ -401,7 +401,6 @@ class AFUNIXSocketImpl extends SocketImpl {
                FileDescriptor[] oneArray = new FileDescriptor[count];
                int offset = 0;
 
-               FileDescriptor[] fds;
                for(Iterator var5 = copy.iterator(); var5.hasNext(); offset += fds.length) {
                   fds = (FileDescriptor[])var5.next();
                   System.arraycopy(fds, 0, oneArray, offset, fds.length);
@@ -424,7 +423,7 @@ class AFUNIXSocketImpl extends SocketImpl {
 
          for(int i = 0; i < fdsLength; ++i) {
             final FileDescriptor fdesc = new FileDescriptor();
-            NativeUnixSocket.initFD(fdesc, fds[i]);
+            org.newsclub.net.unix.NativeUnixSocket.initFD(fdesc, fds[i]);
             descriptors[i] = fdesc;
             this.closeableFileDescriptors.put(fdesc, fds[i]);
             Closeable cleanup = new Closeable() {
@@ -432,7 +431,7 @@ class AFUNIXSocketImpl extends SocketImpl {
                   AFUNIXSocketImpl.this.closeableFileDescriptors.remove(fdesc);
                }
             };
-            NativeUnixSocket.attachCloseable(fdesc, cleanup);
+            org.newsclub.net.unix.NativeUnixSocket.attachCloseable(fdesc, cleanup);
          }
 
          this.receivedFileDescriptors.add(descriptors);
@@ -499,7 +498,7 @@ class AFUNIXSocketImpl extends SocketImpl {
                   throw ex;
                }
 
-               written = NativeUnixSocket.write(AFUNIXSocketImpl.this, fdesc, buf, off, len, AFUNIXSocketImpl.this.pendingFileDescriptors);
+               written = org.newsclub.net.unix.NativeUnixSocket.write(AFUNIXSocketImpl.this, fdesc, buf, off, len, AFUNIXSocketImpl.this.pendingFileDescriptors);
                if (written < 0) {
                   throw new IOException("Unspecific error while writing");
                }
@@ -518,7 +517,7 @@ class AFUNIXSocketImpl extends SocketImpl {
             this.streamClosed = true;
             FileDescriptor fdesc = AFUNIXSocketImpl.this.validFd();
             if (fdesc != null) {
-               NativeUnixSocket.shutdown(fdesc, 1);
+               org.newsclub.net.unix.NativeUnixSocket.shutdown(fdesc, 1);
             }
 
             AFUNIXSocketImpl.this.closedOutputStream = true;
@@ -547,7 +546,7 @@ class AFUNIXSocketImpl extends SocketImpl {
             if (len == 0) {
                return 0;
             } else if (off >= 0 && len >= 0 && len <= buf.length - off) {
-               return NativeUnixSocket.read(AFUNIXSocketImpl.this, fdesc, buf, off, len, AFUNIXSocketImpl.this.ancillaryReceiveBuffer);
+               return org.newsclub.net.unix.NativeUnixSocket.read(AFUNIXSocketImpl.this, fdesc, buf, off, len, AFUNIXSocketImpl.this.ancillaryReceiveBuffer);
             } else {
                throw new IndexOutOfBoundsException();
             }
@@ -564,7 +563,7 @@ class AFUNIXSocketImpl extends SocketImpl {
          this.streamClosed = true;
          FileDescriptor fdesc = AFUNIXSocketImpl.this.validFd();
          if (fdesc != null) {
-            NativeUnixSocket.shutdown(fdesc, 0);
+            org.newsclub.net.unix.NativeUnixSocket.shutdown(fdesc, 0);
          }
 
          AFUNIXSocketImpl.this.closedInputStream = true;
@@ -576,7 +575,7 @@ class AFUNIXSocketImpl extends SocketImpl {
             throw new IOException("This InputStream has already been closed.");
          } else {
             FileDescriptor fdesc = AFUNIXSocketImpl.this.validFdOrException();
-            return NativeUnixSocket.available(fdesc);
+            return org.newsclub.net.unix.NativeUnixSocket.available(fdesc);
          }
       }
 

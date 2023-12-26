@@ -1,5 +1,6 @@
 package com.jagrosh.discordipc.entities.pipe;
 
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonParser;
@@ -19,13 +20,13 @@ public abstract class Pipe {
    private static final String[] unixPaths = new String[]{"XDG_RUNTIME_DIR", "TMPDIR", "TMP", "TEMP"};
    final IPCClient ipcClient;
    private final HashMap callbacks;
-   PipeStatus status;
+   com.jagrosh.discordipc.entities.pipe.PipeStatus status;
    IPCListener listener;
    private DiscordBuild build;
    private User currentUser;
 
    Pipe(IPCClient ipcClient, HashMap callbacks) {
-      this.status = PipeStatus.CONNECTING;
+      this.status = com.jagrosh.discordipc.entities.pipe.PipeStatus.CONNECTING;
       this.ipcClient = ipcClient;
       this.callbacks = callbacks;
    }
@@ -39,46 +40,55 @@ public abstract class Pipe {
       Pipe[] open = new Pipe[DiscordBuild.values().length];
 
       int i;
-      for(i = 0; i < 10; ++i) {
-         try {
-            String location = getPipeLocation(i);
-            if (ipcClient.isDebugMode()) {
-               System.out.printf("Searching for IPC: %s%n", location);
-            }
-
-            pipe = createPipe(ipcClient, callbacks, location);
-            if (pipe != null) {
-               JsonObject finalObject = new JsonObject();
-               finalObject.addProperty("v", 1);
-               finalObject.addProperty("client_id", Long.toString(clientId));
-               pipe.send(Packet.OpCode.HANDSHAKE, finalObject, (Callback)null);
-               Packet p = pipe.read();
-               JsonObject parsedData = (new JsonParser()).parse(p.getJson().getAsJsonPrimitive("").getAsString()).getAsJsonObject();
-               JsonObject data = parsedData.getAsJsonObject("data");
-               JsonObject userData = data.getAsJsonObject("user");
-               pipe.build = DiscordBuild.from(data.getAsJsonObject("config").get("api_endpoint").getAsString());
-               pipe.currentUser = new User(userData.getAsJsonPrimitive("username").getAsString(), userData.getAsJsonPrimitive("discriminator").getAsString(), Long.parseLong(userData.getAsJsonPrimitive("id").getAsString()), userData.has("avatar") ? userData.getAsJsonPrimitive("avatar").getAsString() : null);
+       for (i = 0; i < 10; ++i) {
+           try {
+               String location = getPipeLocation(i);
                if (ipcClient.isDebugMode()) {
-                  System.out.printf("Found a valid client (%s) with packet: %s%n", pipe.build.name(), p.toString());
-                  System.out.printf("Found a valid user (%s) with id: %s%n", pipe.currentUser.getName(), pipe.currentUser.getId());
+                   System.out.printf("Searching for IPC: %s%n", location);
                }
 
-               if (pipe.build == preferredOrder[0] || DiscordBuild.ANY == preferredOrder[0]) {
-                  if (ipcClient.isDebugMode()) {
-                     System.out.printf("Found preferred client: %s%n", pipe.build.name());
-                  }
-                  break;
-               }
+               pipe = createPipe(ipcClient, callbacks, location);
+               if (pipe != null) {
+                   JsonObject finalObject = new JsonObject();
+                   finalObject.addProperty("v", 1);
+                   finalObject.addProperty("client_id", Long.toString(clientId));
+                   pipe.send(Packet.OpCode.HANDSHAKE, finalObject, null);
+                   Packet p = pipe.read();
+                   JsonObject parsedData = (new JsonParser()).parse(p.getJson().getAsJsonPrimitive("").getAsString()).getAsJsonObject();
+                   JsonObject data = parsedData.getAsJsonObject("data");
 
-               open[pipe.build.ordinal()] = pipe;
-               open[DiscordBuild.ANY.ordinal()] = pipe;
-               pipe.build = null;
+                   // Handling JsonNull and extracting data
+                   JsonElement userDataElement = data.get("user");
+                   if (userDataElement != null && !userDataElement.isJsonNull()) {
+                       JsonObject userData = userDataElement.getAsJsonObject();
+                       pipe.build = DiscordBuild.from(data.getAsJsonObject("config").get("api_endpoint").getAsString());
+                       pipe.currentUser = new User(userData.getAsJsonPrimitive("username").getAsString(),
+                           userData.getAsJsonPrimitive("discriminator").getAsString(),
+                           Long.parseLong(userData.getAsJsonPrimitive("id").getAsString()),
+                           userData.has("avatar") ? userData.getAsJsonPrimitive("avatar").getAsString() : null);
+
+                       if (ipcClient.isDebugMode()) {
+                           System.out.printf("Found a valid client (%s) with packet: %s%n", pipe.build.name(), p.toString());
+                           System.out.printf("Found a valid user (%s) with id: %s%n", pipe.currentUser.getName(), pipe.currentUser.getId());
+                       }
+
+                       if (pipe.build == preferredOrder[0] || DiscordBuild.ANY == preferredOrder[0]) {
+                           if (ipcClient.isDebugMode()) {
+                               System.out.printf("Found preferred client: %s%n", pipe.build.name());
+                           }
+                           break;
+                       }
+
+                       open[pipe.build.ordinal()] = pipe;
+                       open[DiscordBuild.ANY.ordinal()] = pipe;
+                       pipe.build = null;
+                       pipe = null;
+                   }
+               }
+           } catch (JsonParseException | IOException var15) {
                pipe = null;
-            }
-         } catch (JsonParseException | IOException var15) {
-            pipe = null;
-         }
-      }
+           }
+       }
 
       if (pipe == null) {
          for(i = 1; i < preferredOrder.length; ++i) {
@@ -125,20 +135,20 @@ public abstract class Pipe {
          }
       }
 
-      pipe.status = PipeStatus.CONNECTED;
+      pipe.status = com.jagrosh.discordipc.entities.pipe.PipeStatus.CONNECTED;
       return pipe;
    }
 
    private static Pipe createPipe(IPCClient ipcClient, HashMap callbacks, String location) {
       String osName = System.getProperty("os.name").toLowerCase();
       if (osName.contains("win")) {
-         WindowsPipe attemptedPipe = new WindowsPipe(ipcClient, callbacks, location);
+         com.jagrosh.discordipc.entities.pipe.WindowsPipe attemptedPipe = new com.jagrosh.discordipc.entities.pipe.WindowsPipe(ipcClient, callbacks, location);
          return attemptedPipe.file != null ? attemptedPipe : null;
       } else if (!osName.contains("linux") && !osName.contains("mac")) {
          throw new RuntimeException("Unsupported OS: " + osName);
       } else {
          try {
-            return new UnixPipe(ipcClient, callbacks, location);
+            return new com.jagrosh.discordipc.entities.pipe.UnixPipe(ipcClient, callbacks, location);
          } catch (IOException var5) {
             throw new RuntimeException(var5);
          }
@@ -192,7 +202,7 @@ public abstract class Pipe {
          }
       } catch (IOException var6) {
          System.out.println("Encountered an IOException while sending a packet and disconnected!");
-         this.status = PipeStatus.DISCONNECTED;
+         this.status = com.jagrosh.discordipc.entities.pipe.PipeStatus.DISCONNECTED;
       }
 
    }
@@ -201,11 +211,11 @@ public abstract class Pipe {
 
    public abstract void write(byte[] var1) throws IOException;
 
-   public PipeStatus getStatus() {
+   public com.jagrosh.discordipc.entities.pipe.PipeStatus getStatus() {
       return this.status;
    }
 
-   public void setStatus(PipeStatus status) {
+   public void setStatus(com.jagrosh.discordipc.entities.pipe.PipeStatus status) {
       this.status = status;
    }
 
